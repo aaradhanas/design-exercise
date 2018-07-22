@@ -7,6 +7,7 @@ import equipment.Type;
 import hotel.Floor;
 import hotel.Hotel;
 import org.junit.Test;
+import sensor.MovementSensor;
 import sensor.Sensor;
 
 import static org.junit.Assert.assertEquals;
@@ -43,7 +44,7 @@ public class ControllerTest {
         Equipment ac1 = new Equipment(Type.AC, 10);
         sc.addEquipment(ac1);
 
-        sc.setSensor(new Sensor(floor, sc));
+        sc.setSensor(new MovementSensor(floor, sc));
 
         controller.initializeController(hotel);
         assertTrue(sc.getSensor().getEventListener() instanceof Controller);
@@ -72,12 +73,12 @@ public class ControllerTest {
         Equipment ac2 = new Equipment(Type.AC, 10);
         mc.addEquipment(ac2);
 
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
         sc.setSensor(sensor);
 
         controller.initializeController(hotel);
 
-        sc.getSensor().movementDetected(true);
+        sc.getSensor().eventDetected(true);
         assertTrue(floor.getPowerConsumption() <= floor.getMaxPowerConsumption());
     }
 }

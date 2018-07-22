@@ -9,6 +9,7 @@ import hotel.Floor;
 import hotel.Hotel;
 import controller.Mode;
 import org.junit.Test;
+import sensor.MovementSensor;
 import sensor.Sensor;
 
 import java.io.*;
@@ -143,7 +144,7 @@ public class FunctionalTest {
         events.forEach( event -> {
             hotel.getFloorByNumber(event.getFloorNumber())
                     .ifPresent(floor -> floor.getCorridorById(event.getCorridorId())
-                                        .ifPresent( corridor -> corridor.getSensor().movementDetected(event.isMovementDetected())));
+                                        .ifPresent( corridor -> corridor.getSensor().eventDetected(event.isMovementDetected())));
         });
     }
 
@@ -175,7 +176,7 @@ public class FunctionalTest {
 
     private void addSensors(Floor floor){
         floor.getCorridors().forEach( corridor -> {
-            Sensor sensor = new Sensor(floor, corridor);
+            Sensor sensor = new MovementSensor(floor, corridor);
             corridor.setSensor(sensor);
         });
     }

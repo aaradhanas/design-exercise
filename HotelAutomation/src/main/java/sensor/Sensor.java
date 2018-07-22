@@ -6,12 +6,13 @@ import listener.EventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 /**
  * Denotes a sensor
  */
-public class Sensor {
+public abstract class Sensor {
 
     /*Format: <FloorNumber>-<CorridorId>-<SensorId>
       Example: 1-SC1-123*/
@@ -31,32 +32,23 @@ public class Sensor {
         return eventListener;
     }
 
-    public void movementDetected(boolean detected){
-        this.notifyMovementDetectedListener(detected);
-    }
-
-    /*public void noMovementDetected(){
-        this.notifyNoMovementDetectedListener();
-    }*/
+    public abstract void eventDetected(boolean detected);
 
     //TODO Move these register, unregister, notify methods to an interface and implement here
     public void registerListener(EventListener eventListener){
         this.eventListener = eventListener;
     }
 
-    public void unregisterMovementDetectedListener(EventListener eventListener){
+    public void unregisterListener(){
         this.eventListener = null;
     }
 
-    private void notifyMovementDetectedListener(boolean detected){
+    protected void notifyListener(boolean detected){
         //this.listeners.forEach( listener -> listener.onMovementDetected(this.getId(), detected));
-        // TODO Possiblity of null pointer
-        eventListener.onEventDetected(this.getId(), detected);
+        // TODO Possiblity of null pointer - Validate
+        Optional.of(eventListener)
+                .ifPresent( eventListener -> eventListener.onEventDetected(this.getId(), detected));
     }
-
-   /* private void notifyNoMovementDetectedListener(){
-        this.listeners.forEach( listener -> listener.onNoMovementDetected(this.getId()));
-    }*/
 
     private String generateSensorId(Floor floor, Corridor corridor){
         String id = floor.getNumber()+"-"+corridor.getId();

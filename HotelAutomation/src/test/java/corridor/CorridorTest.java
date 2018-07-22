@@ -4,6 +4,7 @@ import equipment.Equipment;
 import equipment.Type;
 import hotel.Floor;
 import org.junit.Test;
+import sensor.MovementSensor;
 import sensor.Sensor;
 
 import static org.junit.Assert.assertEquals;
@@ -82,7 +83,7 @@ public class CorridorTest {
         Floor floor = new Floor(1);
         SubCorridor sc = new SubCorridor(1);
         floor.addCorridor(sc);
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
 
         assertTrue(sensor.getId().startsWith("1-SC1"));
     }

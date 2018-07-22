@@ -5,5 +5,6 @@ package listener;
  */
 
 public interface EventListener {
+    //TODO revisit
     void onEventDetected(String sensorId, boolean detected);
 }

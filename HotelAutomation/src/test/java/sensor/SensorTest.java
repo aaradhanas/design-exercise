@@ -31,11 +31,11 @@ public class SensorTest {
         Equipment ac1 = new Equipment(Type.AC, 10);
         sc.addEquipment(ac1);
 
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
         sc.setSensor(sensor);
         controller.initializeController(hotel);
 
-        sc.getSensor().movementDetected(true);
+        sc.getSensor().eventDetected(true);
         assertTrue(sc.isMovementDetected());
     }
 
@@ -62,12 +62,12 @@ public class SensorTest {
         Equipment ac2 = new Equipment(Type.AC, 10);
         mc.addEquipment(ac2);
 
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
         sc.setSensor(sensor);
 
         controller.initializeController(hotel);
 
-        sc.getSensor().movementDetected(true);
+        sc.getSensor().eventDetected(true);
         assertTrue(light1.isOn());
     }
 
@@ -87,11 +87,11 @@ public class SensorTest {
         Equipment ac1 = new Equipment(Type.AC, 10);
         sc.addEquipment(ac1);
 
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
         sc.setSensor(sensor);
         controller.registerToSensorEvents(hotel);
 
-        sc.getSensor().movementDetected(false);
+        sc.getSensor().eventDetected(false);
         assertFalse(sc.isMovementDetected());
     }
 
@@ -118,11 +118,35 @@ public class SensorTest {
         Equipment ac2 = new Equipment(Type.AC, 10);
         mc.addEquipment(ac2);
 
-        Sensor sensor = new Sensor(floor, sc);
+        Sensor sensor = new MovementSensor(floor, sc);
         sc.setSensor(sensor);
         controller.initializeController(hotel);
 
-        sc.getSensor().movementDetected(false);
+        sc.getSensor().eventDetected(false);
         assertTrue(light1.isOff());
+    }
+
+    @Test
+    public void testFireSensorCreation(){
+        Controller controller = new Controller(Mode.NIGHT);
+        Hotel hotel = new Hotel();
+        hotel.setController(controller);
+
+        Floor floor = new Floor(1);
+        SubCorridor sc = new SubCorridor(1);
+        floor.addCorridor(sc);
+        hotel.addFloor(floor);
+
+        Equipment light1 = new Equipment(Type.LIGHT, 5);
+        sc.addEquipment(light1);
+        Equipment ac1 = new Equipment(Type.AC, 10);
+        sc.addEquipment(ac1);
+
+        Sensor sensor = new FireSensor(floor, sc);
+        sc.setSensor(sensor);
+        controller.registerToSensorEvents(hotel);
+
+        sc.getSensor().eventDetected(true);
+        //assertTrue(sc.isFireDetected());
     }
 }
