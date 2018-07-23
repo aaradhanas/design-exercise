@@ -1,2 +1,7 @@
 /HotelAutomation/.idea
+/HotelAutomation/target
 /HotelAutomation/*.iml
+
+/calculator-app/.idea
+/calculator-app/target
+/calculator-app/*.iml
