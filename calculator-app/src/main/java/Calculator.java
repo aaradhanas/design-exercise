@@ -22,6 +22,27 @@ class Calculator {
      * @return BigInteger
      */
     BigInteger add(BigInteger num1, BigInteger num2){
-        return num1.add(num2);
+        try {
+            return num1.add(num2);
+        } catch( ArithmeticException exception){
+            System.out.println("Result is out of range...Returning 0...");
+            return BigInteger.ZERO;
+        }
+    }
+
+    /**
+     * Add method which takes double arguments
+     * @param num1
+     * @param num2
+     * @return double
+     */
+    double add(double num1, double num2){
+        double sum =  num1 + num2;
+
+        if( sum == Double.POSITIVE_INFINITY){
+            System.out.println("Result is out of range...Returning 0...");
+            return 0;
+        }
+        return sum;
     }
 }

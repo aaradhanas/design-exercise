@@ -1,7 +1,6 @@
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import static org.junit.Assert.assertEquals;
@@ -132,4 +131,48 @@ public class CalculatorTest{
         }
         assertEquals("Passed", sum.toString(), "9223372036854775807000");
     }
+
+    @Test
+    public void testAdd_PositiveDoubles(){
+        double sum = calculator.add(1.23,2.45);
+        assertEquals(sum, 3.68, 0);
+    }
+
+    @Test
+    public void testAdd_NegativeDoubles(){
+        double sum = calculator.add(-1.01,-2.10);
+        assertEquals(sum, -3.11, 0);
+    }
+
+    @Test
+    public void testAdd_PositiveNegativeDoubles(){
+        double sum = calculator.add(790.45,-2.2);
+        assertEquals(sum, 788.25, 0);
+    }
+
+    @Test
+    public void testAdd_PositiveDoubleAndZero(){
+        double sum = calculator.add(1000.56,0);
+        assertEquals(sum, 1000.56, 0);
+    }
+
+    @Test
+    public void testAdd_NegativeDoubleAndZero(){
+        double sum = calculator.add(-458.978,0);
+        assertEquals(sum, -458.978, 0);
+    }
+
+    @Test
+    public void testAdd_TwoMaxDoubleValues(){
+        double sum = calculator.add(Double.MAX_VALUE, Double.MAX_VALUE);
+        // Check if the function returns 0 if the result is Double.POSITIVE_INFINITY
+        assertEquals(sum, 0, 0);
+    }
+
+    // TODO Think of a valid testcase
+    /*@Test
+    public void testAdd_TwoMinDoubleValues(){
+        double sum = calculator.add(Double.MIN_VALUE, -1 * Math.pow(10,-307));
+        assertEquals(sum, Double.NEGATIVE_INFINITY, 0);
+    }*/
 }
