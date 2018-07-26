@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by AAS on 7/23/2018.
  */
-public class CalculatorTest{
+public class AddTest {
 
     private static Calculator calculator;
 
@@ -64,6 +64,8 @@ public class CalculatorTest{
         BigInteger sum = calculator.add(Long.MAX_VALUE, Long.MAX_VALUE);
         assertEquals("Passed", sum.toString(), "18446744073709551614");
     }
+
+    //TODO Add 2 small integer values
 
     @Test(expected = ArithmeticException.class)
     public void testAdd_MaxBigIntegerValuePlusOne(){
@@ -140,6 +142,7 @@ public class CalculatorTest{
 
     @Test
     public void testAdd_NegativeDoubles(){
+        // Gives a result of -3.1100000000000003
         double sum = calculator.add(-1.01,-2.10);
         assertEquals(sum, -3.11, 0);
     }
@@ -172,7 +175,7 @@ public class CalculatorTest{
     // TODO Think of a valid testcase
     /*@Test
     public void testAdd_TwoMinDoubleValues(){
-        double sum = calculator.add(Double.MIN_VALUE, -1 * Math.pow(10,-307));
+        double sum = calculator.add(Double.MIN_VALUE, Math.pow(10,-325));
         assertEquals(sum, Double.NEGATIVE_INFINITY, 0);
     }*/
 }

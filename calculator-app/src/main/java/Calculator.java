@@ -39,10 +39,15 @@ class Calculator {
     double add(double num1, double num2){
         double sum =  num1 + num2;
 
-        if( sum == Double.POSITIVE_INFINITY){
+        if( sum == Double.POSITIVE_INFINITY ||  sum == Double.NEGATIVE_INFINITY){
             System.out.println("Result is out of range...Returning 0...");
             return 0;
         }
         return sum;
+    }
+
+
+    long subtract(long num1, long num2){
+        return num1 - num2;
     }
 }
