@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -9,7 +10,7 @@ class Calculator {
      * Add method which takes long arguments
      * @param num1
      * @param num2
-     * @return long
+     * @return BigInteger
      */
     BigInteger add(long num1, long num2){
         return BigInteger.valueOf(num1).add(BigInteger.valueOf(num2));
@@ -34,20 +35,20 @@ class Calculator {
      * Add method which takes double arguments
      * @param num1
      * @param num2
-     * @return double
+     * @return BigDecimal
      */
-    double add(double num1, double num2){
-        double sum =  num1 + num2;
-
-        if( sum == Double.POSITIVE_INFINITY ||  sum == Double.NEGATIVE_INFINITY){
-            System.out.println("Result is out of range...Returning 0...");
-            return 0;
-        }
-        return sum;
+    BigDecimal add(double num1, double num2){
+        return BigDecimal.valueOf(num1).add(BigDecimal.valueOf(num2));
     }
 
+    /**
+     * Subtract methd which takes logn arguments
+     * @param num1
+     * @param num2
+     * @return BigInteger
+     */
 
-    long subtract(long num1, long num2){
-        return num1 - num2;
+    BigInteger subtract(long num1, long num2){
+        return BigInteger.valueOf(num1).subtract(BigInteger.valueOf(num2));
     }
 }
