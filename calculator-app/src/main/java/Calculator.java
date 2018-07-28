@@ -41,6 +41,10 @@ class Calculator {
         return BigDecimal.valueOf(num1).add(BigDecimal.valueOf(num2));
     }
 
+    BigDecimal add(BigDecimal num1, BigDecimal num2){
+        return  num1.add(num2);
+    }
+
     /**
      * Subtract methd which takes logn arguments
      * @param num1
@@ -50,5 +54,9 @@ class Calculator {
 
     BigInteger subtract(long num1, long num2){
         return BigInteger.valueOf(num1).subtract(BigInteger.valueOf(num2));
+    }
+
+    BigDecimal subtract(double num1, double num2){
+        return BigDecimal.valueOf(num1).subtract(BigDecimal.valueOf(num2));
     }
 }

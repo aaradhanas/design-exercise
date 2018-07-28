@@ -78,7 +78,7 @@ public class AddTest {
         BigInteger sum = BigInteger.ZERO;
         int i = 0;
         while(i < 10){
-            sum = sum.add(seed);
+            sum = calculator.add(seed, sum);
             i++;
         }
         assertEquals("Passed", "92233720368547758070", sum.toString());
@@ -90,7 +90,7 @@ public class AddTest {
         BigInteger sum = BigInteger.ZERO;
         int i = 0;
         while(i < 50){
-            sum = sum.add(seed);
+            sum = calculator.add(seed, sum);
             i++;
         }
         assertEquals("Passed", "461168601842738790350", sum.toString());
@@ -102,7 +102,7 @@ public class AddTest {
         BigInteger sum = BigInteger.ZERO;
         int i = 0;
         while(i < 100){
-            sum = sum.add(seed);
+            sum = calculator.add(seed, sum);
             i++;
         }
         assertEquals("Passed", "922337203685477580700", sum.toString());
@@ -114,7 +114,7 @@ public class AddTest {
         BigInteger sum = BigInteger.ZERO;
         int i = 0;
         while(i < 500){
-            sum = sum.add(seed);
+            sum = calculator.add(seed, sum);
             i++;
         }
         assertEquals("Passed", "4611686018427387903500", sum.toString());
@@ -127,7 +127,7 @@ public class AddTest {
         BigInteger sum = BigInteger.ZERO;
         int i = 0;
         while(i < 1000){
-            sum = sum.add(seed);
+            sum = calculator.add(seed, sum);
             i++;
         }
         assertEquals("Passed", "9223372036854775807000", sum.toString());
@@ -165,13 +165,25 @@ public class AddTest {
 
     @Test
     public void testAdd_TwoMaxDoubleValues(){
-        BigDecimal sum = BigDecimal.valueOf(Double.MAX_VALUE).add(BigDecimal.valueOf(Double.MAX_VALUE));
+        BigDecimal sum = calculator.add(Double.MAX_VALUE, Double.MAX_VALUE);
         assertEquals("Passed", "3.5953862697246314E+308", sum.toString());
     }
 
     @Test
     public void testAdd_TwoMinDoubleValues(){
-        BigDecimal sum = calculator.add(Double.MIN_VALUE, Double.MIN_VALUE);
-        assertEquals("Passed", "9.8E-324", sum.toString());
+        double sum = calculator.add(Double.MIN_VALUE, Double.MIN_VALUE).doubleValue();
+        assertEquals(1.0E-323, sum, 0);
+    }
+
+    @Test
+    public void testAdd_10LargeDecimals(){
+        BigDecimal seed = BigDecimal.valueOf(Double.MAX_VALUE);
+        BigDecimal sum = BigDecimal.ZERO;
+        int i = 0;
+        while(i < 10){
+            sum = calculator.add(seed, sum);
+            i++;
+        }
+        assertEquals("Passed", "1797693134862315700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", sum.toString());
     }
 }
