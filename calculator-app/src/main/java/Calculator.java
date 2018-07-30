@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 
 /**
  * Created by AAS on 7/23/2018.
@@ -112,7 +113,7 @@ class Calculator {
      * @param num2
      * @return double
      */
-    double divide(double num1, double num2) {
-        return num1 / num2;
+    BigDecimal divide(double num1, double num2) {
+        return BigDecimal.valueOf(num1).divide(BigDecimal.valueOf(num2), MathContext.DECIMAL64);
     }
 }
