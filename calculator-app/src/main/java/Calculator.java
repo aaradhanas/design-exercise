@@ -113,7 +113,7 @@ class Calculator {
      * @param num2
      * @return double
      */
-    BigDecimal divide(double num1, double num2) {
+    BigDecimal divide(double num1, double num2) throws ArithmeticException{
         return BigDecimal.valueOf(num1).divide(BigDecimal.valueOf(num2), MathContext.DECIMAL64);
     }
 }

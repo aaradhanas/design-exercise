@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static jdk.nashorn.internal.objects.Global.Infinity;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -27,9 +26,7 @@ public class DivideTest {
     @Test
     public void testDivide_NegativeNumbers(){
         double result = calculator.divide(-200, -18).doubleValue();
-        //BigDecimal result = BigDecimal.valueOf(200).divide(BigDecimal.valueOf(18), MathContext.DECIMAL64);
         assertEquals(11.11111111111111, result, 0);
-        //assertEquals(11.1111111111111111, result.doubleValue(), 0);
     }
 
     @Test
@@ -64,12 +61,12 @@ public class DivideTest {
 
     @Test(expected = ArithmeticException.class)
     public void testDivide_PositiveNumberAndZero(){
-        calculator.divide(4567.234345, 0).doubleValue();
+        calculator.divide(4567.234345, 0);
     }
 
     @Test(expected = ArithmeticException.class)
     public void testDivide_NegativeNumberAndZero(){
-       calculator.divide(-1342353453, 0).doubleValue();
+       calculator.divide(-1342353453, 0);
     }
 
     @Test
