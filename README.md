@@ -25,3 +25,23 @@ switched OFF and AC needs to be switched ON
 
 Motion in sub-corridors is input to the controller, which needs to keep track and optimise the power consumption.
 Write a program that takes input values for Floors, Main corridors, Sub corridors and takes different external inputs for motion in sub corridors. For each input, the program prints out the state of all the lights and ACs in the hotel. For simplicity, assume that the controller is operating at the Night Time.
+
+
+## Problem 2
+
+A simple calculator application written using Test Driven Development (TDD) approach. This application supports the following 4 operations:
+
+* Addition
+* Subtraction
+* Multiplication
+* Division
+
+Developing an application using TDD helped me to think of all the positive, negative and edge cases while writing tests. I followed the basic principles of TDD as follows:
+
+1. Write a unit test.
+2. Make it fail (Either compilation error or functional error).
+3. Write code to make the test pass.
+4. Repeat steps 1 to 3. Refactor your code during this process.
+
+[JaCoCo](https://www.eclemma.org/jacoco/) has been used for code coverage.
+
