@@ -15,9 +15,6 @@ public class SubCorridor extends Corridor {
     public SubCorridor(int id){
         super("SC"+id);
     }
-    public SubCorridor(int id, List<Equipment> equipments){
-        super("SC"+id, equipments);
-    }
 
     /**
      * Sets the default state of equipments based on the mode.

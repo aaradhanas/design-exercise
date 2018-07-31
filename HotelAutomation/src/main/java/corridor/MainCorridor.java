@@ -15,9 +15,6 @@ public class MainCorridor extends Corridor {
     public MainCorridor(int id){
         super("MC"+id);
     }
-    public MainCorridor(int id,List<Equipment> equipments){
-        super("MC"+id, equipments);
-    }
 
     /**
      * Sets the default state of equipments based on the mode.

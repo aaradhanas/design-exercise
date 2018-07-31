@@ -23,11 +23,6 @@ public class Floor {
         this.number = number;
     }
 
-    public Floor(int number, List<Corridor> corridors) {
-        this.number = number;
-        this.corridors = corridors;
-    }
-
     public int getNumber() {
         return this.number;
     }

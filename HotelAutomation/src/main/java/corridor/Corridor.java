@@ -30,11 +30,6 @@ public abstract class Corridor {
         this.id = id;
     }
 
-    Corridor(String id, List<Equipment> equipments){
-        this.id = id;
-        this.equipments = equipments;
-    }
-
     public abstract void setDefaultState(Mode mode);
 
     public String getId() {
