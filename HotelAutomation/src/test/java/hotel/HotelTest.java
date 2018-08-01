@@ -1,10 +1,10 @@
 package hotel;
 
 import controller.Controller;
-import controller.Mode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class HotelTest {
@@ -18,10 +18,10 @@ public class HotelTest {
     @Test
     public void testCreateHotelWithController() {
         Hotel hotel = new Hotel("Taj");
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         hotel.setController(controller);
 
-        assertEquals("true", hotel.getController().getMode(), Mode.NIGHT);
+        assertNotNull(hotel.getController());
     }
 
     @Test

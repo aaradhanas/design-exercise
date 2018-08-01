@@ -1,6 +1,5 @@
 package corridor;
 
-import controller.Mode;
 import equipment.Equipment;
 import equipment.Type;
 import sensor.Sensor;
@@ -30,7 +29,7 @@ public abstract class Corridor {
         this.id = id;
     }
 
-    public abstract void setDefaultState(Mode mode);
+    public abstract void setDefaultState();
 
     public String getId() {
         return id;

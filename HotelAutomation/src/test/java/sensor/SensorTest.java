@@ -1,7 +1,6 @@
 package sensor;
 
 import controller.Controller;
-import controller.Mode;
 import corridor.MainCorridor;
 import corridor.SubCorridor;
 import equipment.Equipment;
@@ -17,7 +16,7 @@ public class SensorTest {
 
     @Test
     public void testMovementDetectionInSubCorridor(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -37,11 +36,12 @@ public class SensorTest {
 
         sc.getSensor().eventDetected(true);
         assertTrue(sc.isMovementDetected());
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testLightsOnDuringMovement(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -69,11 +69,12 @@ public class SensorTest {
 
         sc.getSensor().eventDetected(true);
         assertTrue(light1.isOn());
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testNoMovementDetectionInSubCorridor(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -93,11 +94,12 @@ public class SensorTest {
 
         sc.getSensor().eventDetected(false);
         assertFalse(sc.isMovementDetected());
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testLightsOffDuringNoMovement(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -124,11 +126,12 @@ public class SensorTest {
 
         sc.getSensor().eventDetected(false);
         assertTrue(light1.isOff());
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testFireSensorCreation(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -147,6 +150,6 @@ public class SensorTest {
         controller.registerToSensorEvents(hotel);
 
         sc.getSensor().eventDetected(true);
-        //assertTrue(sc.isFireDetected());
+        controller.unregisterFromSensorEvents(hotel);
     }
 }

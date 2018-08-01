@@ -44,8 +44,6 @@ public abstract class Sensor {
     }
 
     protected void notifyListener(boolean detected){
-        //this.listeners.forEach( listener -> listener.onMovementDetected(this.getId(), detected));
-        // TODO Possiblity of null pointer - Validate
         Optional.of(eventListener)
                 .ifPresent( eventListener -> eventListener.onEventDetected(this.getId(), detected));
     }

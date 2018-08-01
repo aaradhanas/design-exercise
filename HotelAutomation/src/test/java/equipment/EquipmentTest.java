@@ -1,7 +1,6 @@
 package equipment;
 
 import controller.Controller;
-import controller.Mode;
 import corridor.MainCorridor;
 import corridor.SubCorridor;
 import hotel.Floor;
@@ -43,7 +42,7 @@ public class EquipmentTest {
 
     @Test
     public void testMainCorridorLightsInitialState(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -59,11 +58,12 @@ public class EquipmentTest {
 
         controller.initializeController(hotel);
         assertTrue(light1.isOn());
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testCorridorACsInitialState(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -81,5 +81,6 @@ public class EquipmentTest {
 
         controller.initializeController(hotel);
         assertTrue(ac1.isOn() && ac2.isOn());
+        controller.unregisterFromSensorEvents(hotel);
     }
 }

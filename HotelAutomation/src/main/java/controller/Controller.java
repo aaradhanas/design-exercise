@@ -16,16 +16,9 @@ import java.util.*;
 
 public class Controller implements EventListener {
 
-    private Mode mode;
     private Hotel hotel;
 
-    public Controller(Mode mode){
-        this.mode = mode;
-    }
-
-    public Mode getMode() {
-        return mode;
-    }
+    public Controller() {}
 
     /**
      *
@@ -38,7 +31,7 @@ public class Controller implements EventListener {
     }
 
     public void initializeDefaultState(){
-        hotel.getFloors().forEach( floor -> floor.setDefaultState(mode));
+        hotel.getFloors().forEach( floor -> floor.setDefaultState());
     }
 
     /**
@@ -57,8 +50,28 @@ public class Controller implements EventListener {
                 });
     }
 
+    /**
+     * Registers to the sensors of the corridors of all the floors of the hotel
+     * @param hotel
+     */
+    public void unregisterFromSensorEvents(Hotel hotel){
+        hotel.getFloors().stream()
+                .map(floor -> floor.getCorridors())
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .forEach( corridor -> {
+                    if(corridor.getSensor() != null) {
+                        corridor.getSensor().unregisterListener();
+                    }
+                });
+    }
+
     public void registerToSensorEvents(){
         registerToSensorEvents(hotel);
+    }
+
+    public void unregisterFromSensorEvents(){
+        unregisterFromSensorEvents(hotel);
     }
 
     @Override
@@ -133,9 +146,7 @@ public class Controller implements EventListener {
     private void compensatePowerConsumption(Floor floor, Corridor corridor, long power) throws Exception {
         List<Corridor> corridors = floor.getCorridors();
         // Consider only sub corridors for compensation in night mode
-        if(mode == Mode.NIGHT) {
-            corridors.removeIf(corr -> corr instanceof MainCorridor);
-        }
+        corridors.removeIf(corr -> corr instanceof MainCorridor);
         if(corridors.size() > 1) {
             // Do not consider the corridor in which movement was detected
             corridors.remove(corridor);
@@ -308,25 +319,5 @@ public class Controller implements EventListener {
     public void printFloorsInfo(){
         hotel.getFloors().forEach(Floor::printFloorInfo);
         System.out.println("==================================================================");
-    }
-
-    /**
-     * Registers to all the sensors of the corridors in the given floor
-     * @param floor
-     */
-    public void registerToSensorEvents(Floor floor){
-                floor.getCorridors().stream()
-                .filter(Objects::nonNull)
-                .forEach( corridor -> corridor.getSensor().registerListener(this));
-    }
-
-    /**
-     * Registers to the sensors in the given corridor
-     * @param corridor
-     */
-    public void registerToSensorEvents(Corridor corridor){
-        if( corridor.getSensor() != null) {
-            corridor.getSensor().registerListener(this);
-        }
     }
 }

@@ -1,11 +1,7 @@
 package corridor;
 
-import equipment.Equipment;
 import equipment.Priority;
 import equipment.Type;
-import controller.Mode;
-
-import java.util.List;
 
 /**
  * Denotes a sub corridor
@@ -17,19 +13,16 @@ public class SubCorridor extends Corridor {
     }
 
     /**
-     * Sets the default state of equipments based on the mode.
-     * @param mode
+     * Sets the default state of equipments.
      */
     @Override
-    public void setDefaultState(Mode mode) {
+    public void setDefaultState() {
         //By default, all ACs are switched ON, all the time
         getEquipments().stream()
                 .filter(equipment -> equipment.getType() == Type.AC)
                 .forEach(equipment -> equipment.switchOn());
 
-        if(mode == Mode.NIGHT) {
-            setNightModeOn();
-        }
+        setNightModeOn();
     }
 
     /**

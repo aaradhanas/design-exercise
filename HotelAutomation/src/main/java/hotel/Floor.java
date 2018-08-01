@@ -3,7 +3,6 @@ package hotel;
 import corridor.Corridor;
 import corridor.MainCorridor;
 import corridor.SubCorridor;
-import controller.Mode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +57,8 @@ public class Floor {
                 .findFirst();
     }
 
-    public void setDefaultState(Mode mode) {
-        corridors.forEach(corridor -> corridor.setDefaultState(mode));
+    public void setDefaultState() {
+        corridors.forEach(corridor -> corridor.setDefaultState());
     }
 
     public void printFloorInfo() {

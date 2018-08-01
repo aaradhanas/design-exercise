@@ -10,27 +10,14 @@ import org.junit.Test;
 import sensor.MovementSensor;
 import sensor.Sensor;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
 public class ControllerTest {
 
     @Test
-    public void testCreateControllerInNightMode(){
-        Controller controller = new Controller(Mode.NIGHT);
-        assertEquals("true", controller.getMode(), Mode.NIGHT);
-    }
-
-    @Test
-    public void testCreateControllerInDayMode(){
-        Controller controller = new Controller(Mode.DAY);
-        assertEquals("true", controller.getMode(), Mode.DAY);
-    }
-
-    @Test
     public void testControllerRegistrationToEvents(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -48,11 +35,12 @@ public class ControllerTest {
 
         controller.initializeController(hotel);
         assertTrue(sc.getSensor().getEventListener() instanceof Controller);
+        controller.unregisterFromSensorEvents(hotel);
     }
 
     @Test
     public void testCompensatePowerConsumption(){
-        Controller controller = new Controller(Mode.NIGHT);
+        Controller controller = new Controller();
         Hotel hotel = new Hotel();
         hotel.setController(controller);
 
@@ -80,5 +68,6 @@ public class ControllerTest {
 
         sc.getSensor().eventDetected(true);
         assertTrue(floor.getPowerConsumption() <= floor.getMaxPowerConsumption());
+        controller.unregisterFromSensorEvents(hotel);
     }
 }

@@ -7,7 +7,6 @@ import equipment.Equipment;
 import equipment.Type;
 import hotel.Floor;
 import hotel.Hotel;
-import controller.Mode;
 import org.junit.Test;
 import sensor.MovementSensor;
 import sensor.Sensor;
@@ -17,7 +16,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+
 import org.apache.commons.io.FileUtils;
 import util.Event;
 import util.Settings;
@@ -129,7 +128,7 @@ public class FunctionalTest {
         hotel.getFloors().forEach(this::addSensors);
 
         // Initialize the controller of the hotel with given mode
-        Controller controller = new Controller(Mode.valueOf(settings.getMode()));
+        Controller controller = new Controller();
         hotel.setController(controller);
         controller.initializeController(hotel);
         controller.printFloorsInfo();
@@ -138,6 +137,7 @@ public class FunctionalTest {
         execute(hotel, settings.getEvents());
 
         //Unregister the sensor events
+        controller.unregisterFromSensorEvents();
     }
 
     private static void execute(Hotel hotel, List<Event> events){
