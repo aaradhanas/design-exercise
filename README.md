@@ -45,3 +45,6 @@ Developing an application using TDD helped me to think of all the positive, nega
 
 [JaCoCo](https://www.eclemma.org/jacoco/) has been used for code coverage.
 
+## JavaScript Concepts
+
+'javascript-concepts' folder contains code samples for basic JS concepts
